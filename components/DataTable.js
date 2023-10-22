@@ -31,8 +31,15 @@ const DataTable = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: 'greenBd' }}>
-      <TableContainer component={Paper} sx={{ backgroundColor: 'white', padding: 2 }}>
+    <Box
+      variant="fullWidth"
+      sx={{ paddingLeft: 2, paddingRight: 2, backgroundColor: "#EFF3F2" }}
+    >
+      <TableContainer
+        variant="fullWidth"
+        component={Paper}
+        sx={{ backgroundColor: "white" }}
+      >
         <Table>
           <TableHead>
             <TableRow>

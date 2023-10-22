@@ -12,7 +12,7 @@ export default function Home() {
     <div className="bg-greenBg">
       <Box sx={{ background: "greenBg", padding: 4, border: "none" }}>
         <Navbar setCurrentValue={setCurrentValue} currentValue={currentValue} />
-        <Box className="w-full pl-3 pr-3">
+        <Box>
           {currentValue === "home" && <DataTable />}
           {currentValue === "page1" && <Page1 />}
           {currentValue === "page2" && <p className="bg-white">Hola PAGE2</p>}
