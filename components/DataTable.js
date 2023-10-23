@@ -13,7 +13,7 @@ import {
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DetailModal from "./DetailsModal";
 
-const DataTable = () => {
+const DataTable = ({ currentValue }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -56,6 +56,7 @@ const DataTable = () => {
         </Table>
       </TableContainer>
       <DetailModal isOpen={isModalOpen} handleClose={handleCloseModal} />
+      <p>{currentValue}</p>
     </Box>
   );
 };
