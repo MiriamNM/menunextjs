@@ -32,11 +32,9 @@ const DataTable = () => {
 
   return (
     <Box
-      variant="fullWidth"
-      sx={{ paddingLeft: 2, paddingRight: 2, backgroundColor: "#EFF3F2" }}
+      sx={{ paddingLeft: 2, paddingRight: 2, backgroundColor: "#EFF3F2", width: "100%", }}
     >
       <TableContainer
-        variant="fullWidth"
         component={Paper}
         sx={{ backgroundColor: "white" }}
       >

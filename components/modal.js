@@ -1,9 +1,10 @@
 "use client";
+import { Box } from '@mui/material';
 import React from 'react'
 
 const Modal = () => {
   return (
-    <div>modal</div>
+    <Box>modal</Box>
   )
 }
 
