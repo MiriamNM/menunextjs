@@ -59,7 +59,7 @@ const Navbar = ({ currentValue, setCurrentValue }) => {
       }}
       variant="fullWidth"
     >
-      <Box
+      <Tab
         sx={{
           overflow: "hidden",
           width: "100%",
@@ -70,41 +70,47 @@ const Navbar = ({ currentValue, setCurrentValue }) => {
           top: "40px",
           // boxShadow: 1,
         }}
-      ></Box>
+      ></Tab>
       {tableArr.map(({ label, state, index }) => (
-          <Tab
-            key={index}
-            label={label}
-            onClick={() => setCurrentValue(state)}
-            checked={currentValue.length > 0}
-            sx={[
-              {
-                width: "100%",
-                height: "100%",
-                backgroundColor: "#BFCFCB !important",
-                color: "#709388 !important",
-                borderRadius: onChangedBorderRadius({ index }),
-                justifyContent: "center",
-                alignItems: "center",
+        <Tab
+          key={index}
+          label={label}
+          onClick={() => setCurrentValue(state)}
+          checked={currentValue.length > 0}
+          sx={[
+            {
+              width: "100%",
+              height: "100%",
+              backgroundColor: "#BFCFCB !important",
+              color: "#709388 !important",
+              borderRadius: onChangedBorderRadius({ index }),
+              justifyContent: "center",
+              alignItems: "center",
+              overflow: "hidden",
+              zIndex: 3,
+              top: "1rem",
+              opacity: 1,
+              border: "none",
+            },
+            currentValue === state && {
+              "&:focus": {
+                backgroundColor: "#fff !important",
+                color: "#000 !important",
+                zIndex: 2,
+                top: "0rem",
+                height: "70px",
                 overflow: "hidden",
-                zIndex: 3,
-                top: "1rem",
                 opacity: 1,
-                boxShadow: 2,
+                boxShadow:
+                  currentValue === state
+                    ? "0px -2px rgba(0, 0, 0, 0.2)" // Agrega una sombra a la pestaña seleccionada
+                    : currentValue.length === 0
+                    ? "0px 4px rgba(0, 0, 0, 0.2)" // Agrega una sombra a las pestañas en blanco
+                    : "none", // Sin sombra para otras pestañas
               },
-              currentValue.length > 0 && {
-                "&:focus": {
-                  backgroundColor: "#fff !important",
-                  color: "#000 !important",
-                  zIndex: 2,
-                  top: "0rem",
-                  height: "70px",
-                  overflow: "hidden",
-                  opacity: 1,
-                }
-              },
-            ]}
-          />
+            },
+          ]}
+        />
       ))}
     </Tabs>
   );
