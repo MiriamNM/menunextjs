@@ -8,9 +8,11 @@ import DataTable from "@/components/DataTable";
 export default function Home() {
   const [currentValue, setCurrentValue] = useState("");
 
-  // useEffect(() => {
-  //   setCurrentValue("home");
-  // }, [])
+  useEffect(() => {
+    if (!currentValue) {
+      setCurrentValue("home");
+    }
+  }, [currentValue, setCurrentValue]);
 
   return (
     <Box sx={{ backgroundColor: "#EEF2F1" }}>
