@@ -25,11 +25,14 @@ const Navbar = ({
   ]);
 
   const onChangedBorderRadius = ({ index }) => {
-    currentValue === "" && "15px 15px 0px 0px";
+    // currentValue === "" && "25px 25px 0px 0px";
 
     if (currentValue === "home") {
       if (index === 2) {
-        return "0px 25px 0px 25px";
+        return "0px 0px 0px 25px";
+      }
+      if (index === 3) {
+        return "0px 25px 0px 0px";
       }
     }
 
@@ -43,8 +46,11 @@ const Navbar = ({
     }
 
     if (currentValue === "page2") {
+      if (index === 1) {
+        return "25px 0px 0px 0px";
+      }
       if (index === 2) {
-        return "25px 0px 25px 0px";
+        return "0px 0px 25px 0px";
       }
     }
 

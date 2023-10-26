@@ -15,15 +15,13 @@ export default function Home() {
   }, [currentValue, setCurrentValue]);
 
   return (
-    <Box sx={{ backgroundColor: "#EEF2F1" }}>
-      <Box sx={{ background: "#EFF3F2", padding: 4, border: "none" }}>
-        <Navbar setCurrentValue={setCurrentValue} currentValue={currentValue} />
-        <Box>
-          {currentValue === "home" && <DataTable currentValue={currentValue} />}
-          {currentValue === "page1" && <DataTable currentValue={currentValue} />}
-          {currentValue === "page2" && <DataTable currentValue={currentValue} />}
-        </Box>
-      </Box>
+    <Box sx={{ backgroundColor: "#EEF2F1 !important", padding: 4 }}>
+      <Navbar setCurrentValue={setCurrentValue} currentValue={currentValue} />
+      {/* <Box>
+        {currentValue === "home" && <DataTable currentValue={currentValue} />}
+        {currentValue === "page1" && <DataTable currentValue={currentValue} />}
+        {currentValue === "page2" && <DataTable currentValue={currentValue} />}
+      </Box> */}
     </Box>
   );
 }

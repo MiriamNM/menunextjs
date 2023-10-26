@@ -32,12 +32,14 @@ const DataTable = ({ currentValue }) => {
 
   return (
     <Box
-      sx={{ paddingLeft: 2, paddingRight: 2, backgroundColor: "#EFF3F2", width: "100%", }}
+      sx={{
+        paddingLeft: 2,
+        paddingRight: 2,
+        backgroundColor: "#EFF3F2",
+        width: "100%",
+      }}
     >
-      <TableContainer
-        component={Paper}
-        sx={{ backgroundColor: "white" }}
-      >
+      <TableContainer component={Paper} sx={{ backgroundColor: "white" }}>
         <Table>
           <TableHead>
             <TableRow>
