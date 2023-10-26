@@ -1,12 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Divider } from "@mui/material";
+import { Tabs, Tab, Box } from "@mui/material";
 
 const Navbar = ({
   currentValue,
   setCurrentValue,
-  selectedTab,
-  setSelectedTab,
 }) => {
   const [itemTable, setItemTable] = useState([
     {
@@ -26,14 +24,31 @@ const Navbar = ({
     },
   ]);
 
-  const onChangedBorderRadius = ({ state, i }) => {
-    if (state === currentValue) {
-      return "25px 25px 0px 0px";
+  const onChangedBorderRadius = ({ index }) => {
+    currentValue === "" && "15px 15px 0px 0px";
+
+    if (currentValue === "home") {
+      if (index === 2) {
+        return "0px 25px 0px 25px";
+      }
     }
-    if (i === 0 && state !== currentValue) return "25px 0px 0px 0px";
-    if (i === itemTable.length - 1 && state !== currentValue)
-      return "0px 25px 0px 0px";
-    if (state !== currentValue) return "0px 0px 0px 0px";
+
+    if (currentValue === "page1") {
+      if (index === 1) {
+        return "25px 0px 25px 0px";
+      }
+      if (index === 3) {
+        return "0px 25px 0px 25px";
+      }
+    }
+
+    if (currentValue === "page2") {
+      if (index === 2) {
+        return "25px 0px 25px 0px";
+      }
+    }
+
+    return "25px 25px 0px 0px";
   };
 
   const focusTab = (state) => {
@@ -56,11 +71,12 @@ const Navbar = ({
 
   return (
     <Tabs
+    value={currentValue}
+    onChange={(event, newValue) => setCurrentValue(newValue)}
       sx={{
         paddingLeft: 2,
         paddingRight: 2,
         width: "100%",
-        height: "100%",
         display: "flex",
       }}
       variant="fullWidth"
@@ -82,7 +98,7 @@ const Navbar = ({
             key={index}
             label={label}
             onClick={() => setCurrentValue(state)}
-            checked={currentValue === state}
+            value={state}
             disableRipple
             sx={[
               {
@@ -90,9 +106,7 @@ const Navbar = ({
                 height: "100%",
                 backgroundColor: "#BFCFCB !important",
                 color: "#709388 !important",
-                borderRadius: onChangedBorderRadius({ state, i }),
-                justifyContent: "center",
-                alignItems: "center",
+                borderRadius: onChangedBorderRadius({ index }),
                 overflow: "hidden",
                 zIndex: 3,
                 top: "1rem",
@@ -105,7 +119,16 @@ const Navbar = ({
               },
             ]}
           />
-          {i === 0 && i === itemTable.length - 1 && <Box key={i} sx={{borderLeft: '1px solid #709388 !important', height: "10px"}}></Box>}
+          {i === 0 && i === itemTable.length - 1 && (
+            <Box
+              key={i}
+              sx={{
+                width: "1px",
+                height: "100%",
+                backgroundColor: "#709388",
+              }}
+            ></Box>
+          )}
         </>
       ))}
     </Tabs>
