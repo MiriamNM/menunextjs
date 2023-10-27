@@ -6,11 +6,11 @@ import Page1 from "@/components/page1";
 import DataTable from "@/components/DataTable";
 
 export default function Home() {
-  const [currentValue, setCurrentValue] = useState("");
+  const [currentValue, setCurrentValue] = useState();
 
   useEffect(() => {
     if (!currentValue) {
-      setCurrentValue("home");
+      setCurrentValue(0);
     }
   }, [currentValue, setCurrentValue]);
 

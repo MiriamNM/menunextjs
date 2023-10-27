@@ -3,15 +3,6 @@ import React, { useState } from "react";
 import { Tabs, Tab, Box, Divider } from "@mui/material";
 
 const DividerComponent = ({ i, currentValue }) => {
-  if(i === currentValue - 1){
-    return
-  }
-  if(  currentValue === i) {
-    return
-  }
-  if(currentValue === 0) {
-    return
-  }
   return (
     <Divider
       orientation="vertical"
@@ -73,6 +64,12 @@ const Navbar = ({ currentValue, setCurrentValue }) => {
   };
 
   const onRenderDivider = (i) => {
+    if(i === currentValue - 1){
+      return
+    }
+    if(  currentValue === i) {
+      return
+    }
     return DividerComponent({ i, currentValue });
   };
 
