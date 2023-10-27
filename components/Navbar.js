@@ -1,11 +1,42 @@
 "use client";
 import React, { useState } from "react";
-import { Tabs, Tab, Box } from "@mui/material";
+import { Tabs, Tab, Box, Divider } from "@mui/material";
 
-const Navbar = ({
-  currentValue,
-  setCurrentValue,
-}) => {
+const DividerComponent = ({ i, currentValue }) => {
+  if(i === currentValue - 1){
+    return
+  }
+  if(  currentValue === i) {
+    return
+  }
+  if(currentValue === 0) {
+    return
+  }
+  return (
+    <Divider
+      orientation="vertical"
+      variant="middle"
+      sx={[
+        {
+          backgroundColor: "#709388 !important",
+          zIndex: 4,
+          width: "2px",
+          maxHeight: "30px",
+          opacity: 1,
+          position: "absolute",
+          right: "0px",
+        },
+        currentValue === i && {
+          "&:focus": {
+            backgroundColor: "#fff",
+          },
+        },
+      ]}
+    />
+  );
+};
+
+const Navbar = ({ currentValue, setCurrentValue }) => {
   const [itemTable, setItemTable] = useState([
     {
       label: "inicio",
@@ -22,39 +53,27 @@ const Navbar = ({
       state: "page2",
       index: 3,
     },
+    {
+      label: "Página 3",
+      state: "page3",
+      index: 4,
+    },
+    {
+      label: "Página 4",
+      state: "page4",
+      index: 5,
+    },
   ]);
 
-  const onChangedBorderRadius = ({ index }) => {
-    // currentValue === "" && "25px 25px 0px 0px";
+  const onChangedBorderRadius = (i, arrayLenght) => {
+    if (currentValue === i) return "25px 25px 0px 0px";
+    if (i === 0) return "25px 0px 0px 0px";
+    if (i === arrayLenght - 1) return "0px 25px 0px 0px";
+    if (i === 1 && i !== arrayLenght - 1) return "0px 0px 0px 0px";
+  };
 
-    if (currentValue === "home") {
-      if (index === 2) {
-        return "0px 0px 0px 25px";
-      }
-      if (index === 3) {
-        return "0px 25px 0px 0px";
-      }
-    }
-
-    if (currentValue === "page1") {
-      if (index === 1) {
-        return "25px 0px 25px 0px";
-      }
-      if (index === 3) {
-        return "0px 25px 0px 25px";
-      }
-    }
-
-    if (currentValue === "page2") {
-      if (index === 1) {
-        return "25px 0px 0px 0px";
-      }
-      if (index === 2) {
-        return "0px 0px 25px 0px";
-      }
-    }
-
-    return "25px 25px 0px 0px";
+  const onRenderDivider = (i) => {
+    return DividerComponent({ i, currentValue });
   };
 
   const focusTab = (state) => {
@@ -72,17 +91,15 @@ const Navbar = ({
           : currentValue.length === 0
           ? "0px 1px rgba(0, 0, 0, 0.1)"
           : "none",
+      flex: 1,
     };
   };
 
   return (
     <Tabs
-    value={currentValue}
-    onChange={(event, newValue) => setCurrentValue(newValue)}
+      value={currentValue}
+      onChange={(event, newValue) => setCurrentValue(newValue)}
       sx={{
-        paddingLeft: 2,
-        paddingRight: 2,
-        width: "100%",
         display: "flex",
       }}
       variant="fullWidth"
@@ -99,43 +116,41 @@ const Navbar = ({
         }}
       ></Tab>
       {itemTable.map(({ label, state, index }, i) => (
-        <>
-          <Tab
-            key={index}
-            label={label}
-            onClick={() => setCurrentValue(state)}
-            value={state}
-            disableRipple
-            sx={[
-              {
-                width: "100%",
-                height: "100%",
-                backgroundColor: "#BFCFCB !important",
-                color: "#709388 !important",
-                borderRadius: onChangedBorderRadius({ index }),
-                overflow: "hidden",
-                zIndex: 3,
-                top: "1rem",
-                opacity: 1,
-                border: "none",
-              },
-              currentValue === state && focusTab(state),
-              currentValue === "home" && {
-                "&:focus": focusTab(state),
-              },
-            ]}
-          />
-          {i === 0 && i === itemTable.length - 1 && (
-            <Box
-              key={i}
-              sx={{
-                width: "1px",
-                height: "100%",
-                backgroundColor: "#709388",
-              }}
-            ></Box>
-          )}
-        </>
+        <Tab
+          key={index}
+          label={label}
+          onClick={() => setCurrentValue(i)}
+          value={state}
+          disableRipple
+          sx={[
+            {
+              width: "100%",
+              height: "100%",
+              backgroundColor: "#BFCFCB !important",
+              color: "#709388",
+              borderRadius: onChangedBorderRadius(
+                i,
+                itemTable.length
+              ),
+              zIndex: 3,
+              top: i === 0 ? "0rem" : "1rem",
+              opacity: 1,
+              border: "none",
+              position: "relative",
+            },
+            currentValue === i && focusTab(i),
+            currentValue === "home" && {
+              "&:focus": focusTab(i),
+            },
+          ]}
+          icon={onRenderDivider( i, itemTable.length)}
+          // icon={
+          //   (currentValue === state || i !== itemTable.length - 1 && divider({ state }))
+          // }
+          // icon={
+          //   (currentValue === state || i !== itemTable.findIndex(item => item.state === currentValue) || i !== itemTable.length - 1) && divider({ state })
+          // }
+        />
       ))}
     </Tabs>
   );

@@ -15,7 +15,7 @@ export default function Home() {
   }, [currentValue, setCurrentValue]);
 
   return (
-    <Box sx={{ backgroundColor: "#EEF2F1 !important", padding: 4 }}>
+    <Box sx={{ backgroundColor: "#EEF2F1", padding: 4 }}>
       <Navbar setCurrentValue={setCurrentValue} currentValue={currentValue} />
       {/* <Box>
         {currentValue === "home" && <DataTable currentValue={currentValue} />}
