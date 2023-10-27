@@ -2,31 +2,6 @@
 import React, { useState } from "react";
 import { Tabs, Tab, Box, Divider } from "@mui/material";
 
-const DividerComponent = ({ i, currentValue }) => {
-  return (
-    <Divider
-      orientation="vertical"
-      variant="middle"
-      sx={[
-        {
-          backgroundColor: "#709388 !important",
-          zIndex: 4,
-          width: "2px",
-          maxHeight: "30px",
-          opacity: 1,
-          position: "absolute",
-          right: "0px",
-        },
-        currentValue === i && {
-          "&:focus": {
-            backgroundColor: "#fff",
-          },
-        },
-      ]}
-    />
-  );
-};
-
 const Navbar = ({ currentValue, setCurrentValue }) => {
   const [itemTable, setItemTable] = useState([
     {
@@ -56,40 +31,63 @@ const Navbar = ({ currentValue, setCurrentValue }) => {
     },
   ]);
 
-  const onChangedBorderRadius = (i, arrayLenght) => {
+  const onChangedBorderRadius = (i, arrLength) => {
+    if (i === 0 && i !== currentValue) return "25px 0px 0px 0px";
+    if (i === arrLength - 1 && i !== currentValue) return "0px 25px 0px 0px";
+    if (i === currentValue - 1) return "0px 0px 25px 0px";
+    if (i === currentValue + 1) return "0px 0px 0px 25px";
     if (currentValue === i) return "25px 25px 0px 0px";
-    if (i === 0) return "25px 0px 0px 0px";
-    if (i === arrayLenght - 1) return "0px 25px 0px 0px";
-    if (i === 1 && i !== arrayLenght - 1) return "0px 0px 0px 0px";
   };
 
-  const onRenderDivider = (i) => {
-    if(i === currentValue - 1){
-      return
+  const onRenderDivider = (i, itemTableLength) => {
+    if (i === currentValue - 1) {
+      return;
     }
-    if(  currentValue === i) {
-      return
+    if (currentValue === i) {
+      return;
+    }
+    if (i === itemTableLength - 1) {
+      return;
     }
     return DividerComponent({ i, currentValue });
   };
 
-  const focusTab = (state) => {
+  const focusTab = () => {
     return {
       backgroundColor: "#fff !important",
       color: "#000 !important",
       zIndex: 2,
       top: "0rem",
-      height: "70px",
       overflow: "hidden",
       opacity: 1,
-      boxShadow:
-        currentValue === state
-          ? "0px 1px rgba(0, 0, 0, 0.1)"
-          : currentValue.length === 0
-          ? "0px 1px rgba(0, 0, 0, 0.1)"
-          : "none",
-      flex: 1,
+      boxShadow: '0px 7px rgba(0, 0, 0, 0.6)',
+      height: "90px",
     };
+  };
+
+  const DividerComponent = ({ i }) => {
+    return (
+      <Divider
+        orientation="vertical"
+        variant="middle"
+        sx={[
+          {
+            backgroundColor: "#709388 !important",
+            zIndex: 4,
+            width: "2px",
+            maxHeight: "30px",
+            opacity: 1,
+            position: "absolute",
+            right: "0px",
+          },
+          currentValue === i && {
+            "&:focus": {
+              backgroundColor: "#fff",
+            },
+          },
+        ]}
+      />
+    );
   };
 
   return (
@@ -112,9 +110,9 @@ const Navbar = ({ currentValue, setCurrentValue }) => {
           top: "40px",
         }}
       ></Tab>
-      {itemTable.map(({ label, state, index }, i) => (
+      {itemTable.map(({ label, state }, i) => (
         <Tab
-          key={index}
+          key={i}
           label={label}
           onClick={() => setCurrentValue(i)}
           value={state}
@@ -122,31 +120,17 @@ const Navbar = ({ currentValue, setCurrentValue }) => {
           sx={[
             {
               width: "100%",
-              height: "100%",
               backgroundColor: "#BFCFCB !important",
               color: "#709388",
-              borderRadius: onChangedBorderRadius(
-                i,
-                itemTable.length
-              ),
+              borderRadius: onChangedBorderRadius(i, itemTable.length),
               zIndex: 3,
-              top: i === 0 ? "0rem" : "1rem",
+              top: "0.78rem",
               opacity: 1,
               border: "none",
-              position: "relative",
             },
-            currentValue === i && focusTab(i),
-            currentValue === "home" && {
-              "&:focus": focusTab(i),
-            },
+            currentValue === i && focusTab(),
           ]}
-          icon={onRenderDivider( i, itemTable.length)}
-          // icon={
-          //   (currentValue === state || i !== itemTable.length - 1 && divider({ state }))
-          // }
-          // icon={
-          //   (currentValue === state || i !== itemTable.findIndex(item => item.state === currentValue) || i !== itemTable.length - 1) && divider({ state })
-          // }
+          icon={onRenderDivider(i, itemTable.length)}
         />
       ))}
     </Tabs>
