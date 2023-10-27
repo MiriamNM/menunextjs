@@ -1,23 +1,27 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import Navbar from "@/components/Navbar";
 import Page1 from "@/components/page1";
 import DataTable from "@/components/DataTable";
 
 export default function Home() {
-  const [currentValue, setCurrentValue] = useState("home");
+  const [currentValue, setCurrentValue] = useState();
+
+  useEffect(() => {
+    if (!currentValue) {
+      setCurrentValue(0);
+    }
+  }, [currentValue, setCurrentValue]);
 
   return (
-    <div className="bg-greenBg">
-      <Box sx={{ background: "greenBg", padding: 4, border: "none" }}>
-        <Navbar setCurrentValue={setCurrentValue} currentValue={currentValue} />
-        <Box className="w-full pl-3 pr-3">
-          {currentValue === "home" && <DataTable />}
-          {currentValue === "page1" && <Page1 />}
-          {currentValue === "page2" && <p className="bg-white">Hola PAGE2</p>}
-        </Box>
-      </Box>
-    </div>
+    <Box sx={{ backgroundColor: "#EEF2F1", padding: 4 }}>
+      <Navbar setCurrentValue={setCurrentValue} currentValue={currentValue} />
+      {/* <Box>
+        {currentValue === "home" && <DataTable currentValue={currentValue} />}
+        {currentValue === "page1" && <DataTable currentValue={currentValue} />}
+        {currentValue === "page2" && <DataTable currentValue={currentValue} />}
+      </Box> */}
+    </Box>
   );
 }
