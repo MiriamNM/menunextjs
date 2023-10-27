@@ -32,11 +32,30 @@ const Navbar = ({ currentValue, setCurrentValue }) => {
   ]);
 
   const onChangedBorderRadius = (i, arrLength) => {
-    if (i === 0 && i !== currentValue) return "25px 0px 0px 0px";
-    if (i === arrLength - 1 && i !== currentValue) return "0px 25px 0px 0px";
-    if (i === currentValue - 1) return "0px 0px 25px 0px";
-    if (i === currentValue + 1) return "0px 0px 0px 25px";
-    if (currentValue === i) return "25px 25px 0px 0px";
+    let topLeft = "0";
+    let topRight= "0";
+    let bottomRight = "0"
+    let bottomLeft = "0"
+
+    const borderRadius = "25px"
+
+    if (currentValue === i){
+      topLeft = borderRadius
+      topRight = borderRadius
+    } else {
+      if(i === currentValue - 1){
+        bottomRight = borderRadius
+      } else if (i === currentValue + 1){
+        bottomLeft = borderRadius
+      }
+    }
+    if(i === 0){
+      topLeft = borderRadius
+    }
+    if(i == arrLength -1){
+      topRight = borderRadius
+    }
+    return  `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`
   };
 
   const onRenderDivider = (i, itemTableLength) => {

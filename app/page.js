@@ -17,11 +17,11 @@ export default function Home() {
   return (
     <Box sx={{ backgroundColor: "#EEF2F1", padding: 4 }}>
       <Navbar setCurrentValue={setCurrentValue} currentValue={currentValue} />
-      {/* <Box>
+      <Box>
         {currentValue === "home" && <DataTable currentValue={currentValue} />}
         {currentValue === "page1" && <DataTable currentValue={currentValue} />}
         {currentValue === "page2" && <DataTable currentValue={currentValue} />}
-      </Box> */}
+      </Box>
     </Box>
   );
 }
