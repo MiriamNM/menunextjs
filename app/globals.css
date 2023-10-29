@@ -2,6 +2,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400; /* Puedes elegir cualquier peso disponible */
+  src: url('/path-to-poppins-font.woff2') format('woff2'); /* Asegúrate de proporcionar la ruta correcta al archivo de la fuente */
+}
+
+.poppins-font {
+  font-family: 'Poppins', sans-serif;
+}
 
 /* :root {
   --foreground-rgb: 0, 0, 0;
@@ -29,3 +39,4 @@ body {
     )
     rgb(var(--background-start-rgb)); */
 }
+

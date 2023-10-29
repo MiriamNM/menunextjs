@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Divider } from "@mui/material";
+import { Tabs, Tab, Divider } from "@mui/material";
 
 const Navbar = ({ currentValue, setCurrentValue }) => {
   const [itemTable, setItemTable] = useState([
@@ -73,14 +73,17 @@ const Navbar = ({ currentValue, setCurrentValue }) => {
 
   const focusTab = () => {
     return {
+      maxWidth: 'none',
+      minWidth: '90px',
+      minHeight: '50px',
+      padding: "13px 16px",
       backgroundColor: "#fff !important",
       color: "#000 !important",
       zIndex: 2,
-      top: "0rem",
+      top: "0px",
       overflow: "hidden",
       opacity: 1,
-      boxShadow: '0px 7px rgba(0, 0, 0, 0.6)',
-      height: "90px",
+      boxShadow: 1,
     };
   };
 
@@ -94,7 +97,7 @@ const Navbar = ({ currentValue, setCurrentValue }) => {
             backgroundColor: "#709388 !important",
             zIndex: 4,
             width: "2px",
-            maxHeight: "30px",
+            maxHeight: "12px",
             opacity: 1,
             position: "absolute",
             right: "0px",
@@ -138,14 +141,16 @@ const Navbar = ({ currentValue, setCurrentValue }) => {
           disableRipple
           sx={[
             {
-              width: "100%",
+              maxWidth: 'none',
+              minWidth: '90px',
+              minHeight: '50px',
+              padding: "13px 16px",
               backgroundColor: "#BFCFCB !important",
               color: "#709388",
               borderRadius: onChangedBorderRadius(i, itemTable.length),
               zIndex: 3,
-              top: "0.78rem",
+              top: "13px",
               opacity: 1,
-              border: "none",
             },
             currentValue === i && focusTab(),
           ]}
