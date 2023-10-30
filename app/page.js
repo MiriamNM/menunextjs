@@ -38,7 +38,6 @@ export default function Home() {
     let topRight = "0";
     let bottomRight = "0";
     let bottomLeft = "0";
-
     const borderRadius = "25px";
 
     if (currentValue === i) {
@@ -98,11 +97,12 @@ export default function Home() {
           {
             backgroundColor: "#709388 !important",
             zIndex: 4,
-            width: "2px",
-            maxHeight: "12px",
+            width: "1px",
+            maxHeight: "22px",
             opacity: 1,
             position: "absolute",
             right: "0px",
+            top: "1px",
           },
           currentValue === i && {
             "&:focus": {
