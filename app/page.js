@@ -4,27 +4,22 @@ import { Box, Typography, Tabs, Tab, Divider } from "@mui/material";
 const itemTableMock = [
   {
     label: "inicio",
-    index: 1,
     panel: "Home",
   },
   {
     label: "Página 1",
-    index: 2,
     panel: "Page1",
   },
   {
     label: "Página 2",
-    index: 3,
     panel: "Page2",
   },
   {
     label: "Página 3",
-    index: 4,
     panel: "Page3",
   },
   {
     label: "Página 4",
-    index: 5,
     panel: "Page4",
   },
 ];
@@ -40,43 +35,43 @@ export default function NavbarComponent({ tabsData }) {
     }
   }, [currentValue, setCurrentValue]);
 
-  const onChangedBorderRadius = (i, arrLength) => {
+  const onChangedBorderRadius = (index, arrLength) => {
     let topLeft = "0";
     let topRight = "0";
     let bottomRight = "0";
     let bottomLeft = "0";
     const borderRadius = "25px";
 
-    if (currentValue === i) {
+    if (currentValue === index) {
       topLeft = borderRadius;
       topRight = borderRadius;
     } else {
-      if (i === currentValue - 1) {
+      if (index === currentValue - 1) {
         bottomRight = borderRadius;
-      } else if (i === currentValue + 1) {
+      } else if (index === currentValue + 1) {
         bottomLeft = borderRadius;
       }
     }
-    if (i === 0) {
+    if (index === 0) {
       topLeft = borderRadius;
     }
-    if (i == arrLength - 1) {
+    if (index == arrLength - 1) {
       topRight = borderRadius;
     }
     return `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`;
   };
 
-  const onRenderDivider = (i, itemTableLength) => {
-    if (i === currentValue - 1) {
+  const onRenderDivider = (index, itemTableLength) => {
+    if (index === currentValue - 1) {
       return;
     }
-    if (currentValue === i) {
+    if (currentValue === index) {
       return;
     }
-    if (i === itemTableLength - 1) {
+    if (index === itemTableLength - 1) {
       return;
     }
-    return DividerComponent({ i, currentValue });
+    return DividerComponent({ index, currentValue });
   };
 
   const focusTab = () => {
@@ -95,7 +90,7 @@ export default function NavbarComponent({ tabsData }) {
     };
   };
 
-  const DividerComponent = ({ i }) => {
+  const DividerComponent = ({ index }) => {
     return (
       <Divider
         orientation="vertical"
@@ -111,7 +106,7 @@ export default function NavbarComponent({ tabsData }) {
             right: "0px",
             top: "1px",
           },
-          currentValue === i && {
+          currentValue === index && {
             "&:focus": {
               backgroundColor: "#fff",
             },
@@ -142,12 +137,12 @@ export default function NavbarComponent({ tabsData }) {
             top: "40px",
           }}
         ></Tab>
-        {data.map(({ label, state }, i) => (
+        {data.map(({ label }, index) => (
           <Tab
-            key={i}
+            key={index}
             label={label}
-            onClick={() => setCurrentValue(i)}
-            value={state}
+            onClick={() => setCurrentValue(index)}
+            value={label}
             disableRipple
             sx={[
               {
@@ -157,20 +152,20 @@ export default function NavbarComponent({ tabsData }) {
                 padding: "13px 16px",
                 backgroundColor: "#BFCFCB !important",
                 color: "#709388 !important",
-                borderRadius: onChangedBorderRadius(i, data.length),
+                borderRadius: onChangedBorderRadius(index, data.length),
                 zIndex: 3,
                 top: "13px",
                 opacity: 1,
               },
-              currentValue === i && focusTab(),
+              currentValue === index && focusTab(),
             ]}
-            icon={onRenderDivider(i, data.length)}
+            icon={onRenderDivider(index, data.length)}
           />
         ))}
       </Tabs>
       <Box sx={{ backgroundColor: "#fff", width: "100%", height: "600px" }}>
-        {data.map(({ panel }, i) => {
-          return currentValue === i && <Typography>{panel}</Typography>;
+        {data.map(({ panel }, index) => {
+          return currentValue === index && <Typography>{panel}</Typography>;
         })}
       </Box>
     </Box>
