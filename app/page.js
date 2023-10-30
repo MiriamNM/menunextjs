@@ -1,31 +1,38 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Tabs, Tab, Divider } from "@mui/material";
+const itemTableMock = [
+  {
+    label: "inicio",
+    index: 1,
+    panel: "Home",
+  },
+  {
+    label: "Página 1",
+    index: 2,
+    panel: "Page1",
+  },
+  {
+    label: "Página 2",
+    index: 3,
+    panel: "Page2",
+  },
+  {
+    label: "Página 3",
+    index: 4,
+    panel: "Page3",
+  },
+  {
+    label: "Página 4",
+    index: 5,
+    panel: "Page4",
+  },
+];
 
-export default function Home() {
+export default function NavbarComponent({ tabsData }) {
   const [currentValue, setCurrentValue] = useState(0);
-  const [itemTable, setItemTable] = useState([
-    {
-      label: "inicio",
-      index: 1,
-    },
-    {
-      label: "Página 1",
-      index: 2,
-    },
-    {
-      label: "Página 2",
-      index: 3,
-    },
-    {
-      label: "Página 3",
-      index: 4,
-    },
-    {
-      label: "Página 4",
-      index: 5,
-    },
-  ]);
+    
+  const data = tabsData || itemTableMock;
 
   useEffect(() => {
     if (!currentValue) {
@@ -135,7 +142,7 @@ export default function Home() {
             top: "40px",
           }}
         ></Tab>
-        {itemTable.map(({ label, state }, i) => (
+        {data.map(({ label, state }, i) => (
           <Tab
             key={i}
             label={label}
@@ -150,18 +157,22 @@ export default function Home() {
                 padding: "13px 16px",
                 backgroundColor: "#BFCFCB !important",
                 color: "#709388 !important",
-                borderRadius: onChangedBorderRadius(i, itemTable.length),
+                borderRadius: onChangedBorderRadius(i, data.length),
                 zIndex: 3,
                 top: "13px",
                 opacity: 1,
               },
               currentValue === i && focusTab(),
             ]}
-            icon={onRenderDivider(i, itemTable.length)}
+            icon={onRenderDivider(i, data.length)}
           />
         ))}
       </Tabs>
-      <Typography>Texto</Typography>
+      <Box sx={{ backgroundColor: "#fff", width: "100%", height: "600px" }}>
+        {data.map(({ panel }, i) => {
+          return currentValue === i && <Typography>{panel}</Typography>;
+        })}
+      </Box>
     </Box>
   );
 }
