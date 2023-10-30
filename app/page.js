@@ -137,7 +137,7 @@ export default function NavbarComponent({ tabsData }) {
             top: "40px",
           }}
         ></Tab>
-        {data.map(({ label }, index) => (
+        { Array.isArray(data) && data.map(({ label }, index) => (
           <Tab
             key={index}
             label={label}
@@ -164,7 +164,7 @@ export default function NavbarComponent({ tabsData }) {
         ))}
       </Tabs>
       <Box sx={{ backgroundColor: "#fff", width: "100%", height: "600px" }}>
-        {data.map(({ panel }, index) => {
+        { Array.isArray(data) && data.map(({ panel }, index) => {
           return currentValue === index && <Typography>{panel}</Typography>;
         })}
       </Box>
